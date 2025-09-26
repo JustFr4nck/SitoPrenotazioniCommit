@@ -1,0 +1,67 @@
+stages:
+  - node
+  - deploy
+
+node_modules:
+  image: node:24-bullseye-slim
+  stage: node
+  script:
+    - NODE_ENV=production npm ci
+  cache:
+    key: $CI_PROJECT_NAMESPACE-$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
+    paths:
+      - node_modules/
+  only:
+    refs:
+      - main
+      - develop
+
+staging:
+  image: node:24-bullseye-slim
+  stage: deploy
+  cache:
+    key: $CI_PROJECT_NAMESPACE-$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
+    paths:
+      - node_modules/
+    policy: pull
+  before_script:
+    - apt-get update -y
+    - apt-get install rsync openssh-client -y
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - ssh-add <(echo "$COMMIT_PRIVATE_KEY")
+  script:
+    - cp .env.production .env
+    - npm run generate
+    - cd dist && rsync -rav -e ssh ./ prenotazioni@192.168.200.15:/home/prenotazioni/prenotazioni.dev-comm.it
+  environment:
+    name: staging
+    url: https://prenotazioni.dev-comm.it
+  only:
+    - develop
+
+production:
+  image: node:24-bullseye-slim
+  stage: deploy
+  cache:
+    key: $CI_PROJECT_NAMESPACE-$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
+    paths:
+      - node_modules/
+    policy: pull
+  before_script:
+    - apt-get update -y
+    - apt-get install rsync openssh-client -y
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - ssh-add <(echo "$COMMIT_PRIVATE_KEY")
+  script:
+    - cp .env.production .env
+    - npm run generate
+    - cd dist && rsync -rav -e ssh ./ prenotazioni@192.168.200.15:/home/prenotazioni/prenotazioni.comm-it.it
+  environment:
+    name: production
+    url: https://prenotazioni.comm-it.it
+  only:
+    - main

@@ -1,0 +1,25 @@
+
+.room-pt { background-color: #3b82f6 !important }
+.room-pp { background-color: #10b981 !important; }
+.room-sp { background-color: #f59e42 !important; }
+
+/* Personalizzazione eventi VueCal 5 */
+.vuecal__event,
+.vuecal__event-title {
+  color: #111 !important;
+  border-radius: 5px !important;
+  font-weight: 500;
+}
+
+/* Migliora la leggibilità degli eventi */
+.vuecal__event {
+  box-shadow: 0 2px 8px 0 #0001;
+  border: 1px solid #e5e7eb;
+}
+
+/* Opzionale: stile per evento selezionato */
+.vuecal__event--selected {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+}
+

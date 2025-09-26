@@ -1,0 +1,41 @@
+{
+  "name": "calendario-prenotazioni",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev -p 3001",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint . --ext .js,.ts,.vue"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.0.1",
+    "@fortawesome/free-brands-svg-icons": "^7.0.1",
+    "@fortawesome/free-regular-svg-icons": "^7.0.1",
+    "@fortawesome/free-solid-svg-icons": "^7.0.1",
+    "@fortawesome/vue-fontawesome": "^3.1.2",
+    "@nuxt/eslint": "^1.4.1",
+    "@nuxt/fonts": "^0.11.4",
+    "@nuxt/icon": "^1.14.0",
+    "@nuxt/image": "^1.10.0",
+    "@nuxt/scripts": "^0.11.8",
+    "@nuxtjs/tailwindcss": "^7.0.0-beta.0",
+    "@supabase/supabase-js": "^2.50.2",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@unhead/vue": "^2.0.11",
+    "eslint": "^9.29.0",
+    "lodash": "^4.17.21",
+    "nuxt": "^3.17.5",
+    "vue": "^3.5.17",
+    "vue-cal": "^5.0.1-rc.29",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "supabase": "^2.30.4",
+    "tailwindcss": "^4.1.11"
+  }
+}

@@ -1,0 +1,5 @@
+[
+  { "nome": "PIANO TERRA", "colore": "#3b82f6", "class": "room-pt" },
+  { "nome": "PRIMO PIANO", "colore": "#10b981", "class": "room-pp" },
+  { "nome": "SECONDO PIANO", "colore": "#f59e42", "class": "room-sp" }
+]
